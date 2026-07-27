@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CommonUtils" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <!-- 设置状态栏为透明 -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!-- 设置导航栏为透明 -->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!-- 根据系统窗口(如状态栏)调整视图布局。当为true，则调整此视图的填充，为系统窗口留下空间。仅当此视图位于非嵌入活动中时才会生效 -->
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+</resources>
