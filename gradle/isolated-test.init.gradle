@@ -1,0 +1,7 @@
+gradle.beforeProject { p ->
+    p.plugins.withId('com.android.application') {
+        p.androidComponents.finalizeDsl { dsl ->
+            dsl.defaultConfig.applicationId = 'com.luxu.commonutils.reviewtest'
+        }
+    }
+}

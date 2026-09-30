@@ -1,10 +1,10 @@
 package com.luxu.commonutils
 
 data class PasswordBean(
-    var id: Int,
-    var webName: String,
-    var account: String,
-    var password: String,
-    var time: String,
-    var remark: String
+    val id: String,
+    val webName: String,
+    val account: String,
+    val password: String,
+    val time: String,
+    val remark: String
 )

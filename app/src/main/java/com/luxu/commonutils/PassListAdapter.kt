@@ -24,11 +24,6 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
         searchData("")
     }
 
-    fun changeData(pos: Int) {
-        passList.removeAt(pos)
-        notifyItemRemoved(pos)
-    }
-
     fun searchData(text: String) {
         passList.clear()
         allPassList?.forEach {
@@ -57,11 +52,13 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
             mViewHolder.itemClick!!.apply {
                 setOnClickListener {
                     val position: Int = mViewHolder.adapterPosition
-                    onItemClickListener.onClick(it, passList[position], position)
+                    if (position != RecyclerView.NO_POSITION && position in passList.indices)
+                        onItemClickListener.onClick(it, passList[position], position)
                 }
                 setOnLongClickListener {
                     val position: Int = mViewHolder.adapterPosition
-                    onItemClickListener.onLongClick(it, passList[position], position)
+                    if (position != RecyclerView.NO_POSITION && position in passList.indices)
+                        onItemClickListener.onLongClick(it, passList[position], position)
                     true
                 }
             }
