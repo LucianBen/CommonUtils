@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
@@ -25,14 +26,20 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
     }
 
     fun searchData(text: String) {
-        passList.clear()
-        allPassList?.forEach {
-            if (it.webName.contains(text) || text.isEmpty()) {
-                passList.add(it)
-            }
-        }
-
-        notifyDataSetChanged()
+        val oldList = passList
+        val newList = ArrayList(allPassList.orEmpty().filter {
+            it.webName.contains(text) || text.isEmpty()
+        })
+        val diff = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
+            override fun getOldListSize() = oldList.size
+            override fun getNewListSize() = newList.size
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                oldList[oldItemPosition].id == newList[newItemPosition].id
+            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+                oldList[oldItemPosition] == newList[newItemPosition]
+        })
+        passList = newList
+        diff.dispatchUpdatesTo(this)
     }
 
 
@@ -49,19 +56,19 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
         val mViewHolder = MyViewHolder(view)
 
         view.findViewById<View>(R.id.copy_password).setOnClickListener {
-            val position = mViewHolder.adapterPosition
+            val position = mViewHolder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION && position in passList.indices)
                 onItemClickListener.onClick(it, passList[position], position)
         }
         onItemClickListener.let {
             mViewHolder.itemClick!!.apply {
                 setOnClickListener {
-                    val position: Int = mViewHolder.adapterPosition
+                    val position: Int = mViewHolder.bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION && position in passList.indices)
                         onItemClickListener.onClick(it, passList[position], position)
                 }
                 setOnLongClickListener {
-                    val position: Int = mViewHolder.adapterPosition
+                    val position: Int = mViewHolder.bindingAdapterPosition
                     if (position != RecyclerView.NO_POSITION && position in passList.indices)
                         onItemClickListener.onLongClick(it, passList[position], position)
                     true
