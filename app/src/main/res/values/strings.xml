@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">密码管理器</string>
+    <string name="home_title">常用工具</string>
+    <string name="home_subtitle">让日常更简单</string>
+    <string name="password_manager">密码管理器</string>
+    <string name="password_description">管理账户与密码</string>
+    <string name="water_reminder">喝水提醒</string>
+    <string name="water_description">记得及时补充水分</string>
+    <string name="accounting">记账</string>
+    <string name="accounting_description">功能开发中</string>
+    <string name="feature_in_development">功能开发中</string>
+    <string name="search_website">查找网站</string>
+    <string name="all_passwords">全部密码</string>
+    <string name="record_count">%1$d 条</string>
+    <string name="add_password">新增密码</string>
+    <string name="copy_password">复制密码</string>
+    <string name="account_label">账户</string>
+    <string name="password_label">密码</string>
+    <string name="remark_label">备注</string>
+    <string name="vault_loading">正在读取密码库…</string>
+    <string name="vault_empty">密码库暂无记录</string>
+    <string name="legacy_notice">旧文件仍保留明文密码\nneed.json 已按你的选择保留</string>
+    <string name="legacy_notice_empty">旧文件仍保留明文密码\nneed.json 已按你的选择保留\n密码库暂无记录</string>
+    <string name="website_label">网站</string>
+    <string name="remark_optional">备注（选填）</string>
+    <string name="random_password">随机密码</string>
+    <string name="save_password">保存密码</string>
+    <string name="edit_password">编辑密码</string>
 </resources>

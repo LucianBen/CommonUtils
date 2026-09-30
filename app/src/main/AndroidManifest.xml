@@ -22,8 +22,15 @@
             android:exported="false" />
         <activity
             android:name=".activity.AddPsdActivity"
+            android:theme="@style/Theme.CommonUtils.Home"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
+            android:name=".activity.PasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CommonUtils.Home" />
+        <activity
+            android:theme="@style/Theme.CommonUtils.Home"
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>

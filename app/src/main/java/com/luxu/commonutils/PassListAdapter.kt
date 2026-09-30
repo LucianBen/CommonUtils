@@ -48,6 +48,11 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
             LayoutInflater.from(parent.context).inflate(R.layout.passlist_item, parent, false)
         val mViewHolder = MyViewHolder(view)
 
+        view.findViewById<View>(R.id.copy_password).setOnClickListener {
+            val position = mViewHolder.adapterPosition
+            if (position != RecyclerView.NO_POSITION && position in passList.indices)
+                onItemClickListener.onClick(it, passList[position], position)
+        }
         onItemClickListener.let {
             mViewHolder.itemClick!!.apply {
                 setOnClickListener {
@@ -68,6 +73,7 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
     }
 
     override fun onBindViewHolder(holder: PassListAdapter.MyViewHolder, position: Int) {
+        holder.siteInitial.text = passList[position].webName.take(1).uppercase()
         holder.account!!.text = passList[position].account
         holder.webName!!.text = passList[position].webName
         holder.password!!.text = passList[position].password
@@ -89,6 +95,7 @@ class PassListAdapter(dl: ArrayList<PasswordBean>, mContext: Context) :
     }
 
     inner class MyViewHolder(view: View) : ViewHolder(view) {
+        val siteInitial: TextView = view.findViewById(R.id.site_initial)
         var webName: TextView? = null
         var account: TextView? = null
         var password: TextView? = null

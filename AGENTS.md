@@ -6,7 +6,7 @@ Android 本地密码管理器，另含饮水提醒。项目当前使用方式见
 
 - `app/src/main/java/com/luxu/commonutils/data/`：严格解析、稳定 ID、密码库仓储和原子文件提交。
 - `app/src/main/java/com/luxu/commonutils/crypto/`：主密码派生、版本化 AES-GCM 密码库格式。
-- `activity/`、`base/`：页面和密码页面保护；VaultApplication 管理进程内解锁会话。
+- `activity/`、`base/`：MainActivity 是工具首页，PasswordActivity 是密码列表页，ClockActivity 是饮水提醒页；密码页面保护及 VaultApplication 管理进程内解锁会话。
 - `app/src/main/res/`：布局、主题和系统备份排除规则。
 - `app/src/test/`：JVM 加密与原子写入回归测试。
 - `app/src/androidTest/`：Android 密码库迁移及 CRUD 回归测试。
@@ -17,6 +17,7 @@ Android 本地密码管理器，另含饮水提醒。项目当前使用方式见
 
 - 用户要求暂时取消全部主密码弹窗：默认通过 Android Keystore 自动打开本机加密库 `vault-device.dat`，不要求主密码或身份验证；密码页面启用 FLAG_SECURE。
 - 用户要求主页面直接显示明文密码，不使用掩码；编辑页密码输入与剪贴板保护遵循现有行为。
+- 工具首页提供密码管理器、喝水提醒、记账入口；记账当前仅提示「功能开发中」。首页、密码列表及新增/编辑页使用独立的 Material 3 浅色主题，不影响饮水提醒页面主题。
 - 本机格式使用不可导出的 256 位 AES 密钥及 AES-GCM 随机 IV，文件头纳入认证。已有主密码格式 `vault.dat` 保留兼容代码；没有本机库时发现该文件必须明确报错，不得回退到过期旧记录。已有本机库丢失密钥时禁止重建或覆盖。
 - 所有磁盘操作和密钥派生在 IO 线程执行；Repository 操作按稳定 ID，禁止传 Adapter position。
 - 写入先加密至同目录临时文件、刷盘、解密及逐字段验证，再原子替换；不得降级到非原子覆盖。

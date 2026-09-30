@@ -46,7 +46,7 @@ class AddPsdActivity : BaseActivity(), View.OnClickListener {
         findViewById<TextView>(R.id.randomPsd).setOnClickListener(this)
         findViewById<TextView>(R.id.copy).setOnClickListener(this)
         findViewById<Toolbar>(R.id.toolbar).also {
-            it.title = if (id == null) "添加密码" else "编辑密码"; setSupportActionBar(it)
+            it.setTitle(if (id == null) R.string.add_password else R.string.edit_password); setSupportActionBar(it)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val repository = VaultSession.repository ?: return

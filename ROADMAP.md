@@ -2,6 +2,7 @@
 
 ## 本轮范围与决定
 
+- MainActivity 改为工具首页，密码列表迁移至 PasswordActivity；首页提供密码管理器、喝水提醒与记账入口。记账按用户选择仅提示「功能开发中」。首页、密码列表、新增/编辑页采用 Material 3 浅紫色主题，饮水提醒功能保持现状。
 - 按用户最新要求移除全部主密码设置和解锁弹窗，默认通过 Android Keystore 自动打开本机加密 vault-device.dat；当前不要求身份验证。主密码 v1 仅保留兼容代码，旧 vault.dat 不覆盖、不回退到旧明文。
 - 用户选择保留 need.json：迁移后不修改、不删除，残余明文 P1 保留。
 - 实机只读检查确认原 need.json 为 4375 字节、20 条完整记录，未发现 vault.dat。此前空白列表来自未解锁时隐藏数据，没有证据表明记录被清空。
@@ -9,11 +10,13 @@
 
 ## 待验证
 
+- 工具首页导航、密码列表及新增/编辑页的 Material 3 真机渲染、长文本/大字体和键盘避让尚未验证；本轮仅构建与静态检查，不安装或替换真实应用。
 - 设备端验证待解除安装限制：已连接 Android 13 手机拒绝独立测试包安装，原应用没有被替换，本轮对原文件仅进行只读检查，未改写。
 - 剪贴板敏感预览、系统复制时间匹配和焦点恢复后的实际清理行为待设备验证；PasswordClipTest 已编译。进程终止或后台无法读取时，不能保证严格 30 秒清理。
 
 ## 最近完成
 
+- 2026-09-30 23:15：完成工具首页与独立密码列表、新增/编辑页的 Material 3 界面改造：三个图标入口、圆角搜索与密码卡片、复制图标、记录数量、新增悬浮按钮、轮廓输入框、随机/复制及保存按钮。保留明文显示、稳定 ID 编辑删除、自动读取、草稿和敏感剪贴板逻辑。同步 AGENTS.md、README.md；修正 README 的实际 APK 路径。
 - 2026-09-30 22:40：按用户要求恢复主页密码明文显示，移除列表固定掩码；点击复制、搜索及编辑删除保持现有行为。AGENTS.md 和 README.md 同步显示规则。
 
 - 2026-09-30 22:32：移除全部主密码弹窗及其输入逻辑；自动打开本机 Keystore 加密库并迁移旧记录，新增读取状态和失败提示。保留全部原文件，已有旧主密码库及密钥丢失时拒绝覆盖。AGENTS.md、README.md、REVIEW.md 同步当前决定。
@@ -25,6 +28,7 @@
 
 ## 最近验证
 
+- 2026-09-30 23:15：最终 assembleDebug、testDebugUnitTest、lintDebug 通过；30 项 JVM 测试零失败、零错误，Lint 零错误、15 项警告，改动页面无 Lint 警告；Manifest 与布局 XML 解析、git diff --check 通过。生成 APK 包名 com.luxu.commonutils，路径 app/build/intermediates/apk/debug/app-debug.apk。设备端 UI 和交互未验证，未安装真实应用。
 - 2026-09-30 22:40：assembleDebug、git diff --check 通过；静态核对列表绑定真实 password，布局未设置密码变换。实机显示未验证。
 
 - 2026-09-30 22:36：最终 assembleDebug、30 项 JVM 测试、lintDebug 通过；新增 Android Keystore 测试编译通过但未执行。APK 包名为 com.luxu.commonutils。再次只读核对 need.json 的 SHA-256 与排查初始值一致，未改写原文件。
